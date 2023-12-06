@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Category;
+use App\Models\Note;
 
 /**
  * Class HomeController
@@ -28,6 +30,7 @@ class HomeController extends AControllerBase
      */
     public function index(): Response
     {
+
         return $this->html();
     }
 
@@ -37,6 +40,11 @@ class HomeController extends AControllerBase
      */
     public function contact(): Response
     {
-        return $this->html();
+        $cats = Category::getAll();
+        $notes = Note::getAll();
+        return $this->html([
+            "categories" => $cats,
+            "notes" => $notes
+        ]);
     }
 }
