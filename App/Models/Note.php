@@ -62,6 +62,14 @@ class Note extends Model
         $this->poznamka = $poznamka;
     }
 
+    public function getAuthor(): ?User
+    {
+        return User::getOne($this->user_id);
+    }
 
+    public function getCategory(): ?Category
+    {
+        return Category::getOne($this->id_cat);
+    }
 
 }

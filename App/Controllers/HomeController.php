@@ -47,4 +47,9 @@ class HomeController extends AControllerBase
             "notes" => $notes
         ]);
     }
+
+    public function addNote(): Response
+    {
+        return $this->html(["categories" => Category::getAll()]);
+    }
 }

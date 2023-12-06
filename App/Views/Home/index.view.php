@@ -1,3 +1,7 @@
+<?php
+/** @var \App\Core\LinkGenerator $link */
+?>
+
 <div class="container">
     <div class="text-center py-5d">
         <h1>NoteHub – váš sprievodca organizácie a produktivity!</h1>
@@ -42,7 +46,7 @@
                         Naše užívateľské rozhranie vám poskytuje jednoduchý a intuitívny spôsob práce s vašimi myšlienkami.
                         Nemusíte sa ničoho obávať. Vaše myšlienky sú vždy na dosah ruky, takže ich môžete zaznamenávať a sledovať, ako sa menia a rozvíjajú.
                     </p>
-                    <a href="poznamky.html" class="btn btn-primary">Nechajte kreativitu voľne plynúť a začnite písať!</a>
+                    <a href="<?= $link->url("home.note") ?>" class="btn btn-primary">Nechajte kreativitu voľne plynúť a začnite písať!</a>
                 </div>
             </div>
         </div>

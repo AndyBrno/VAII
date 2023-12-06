@@ -20,8 +20,8 @@
                 <?php foreach ($data["categories"] as $category):?>
                     <a class="list-group-item list-group-item-action" href="#<?= $category->getId()?>"><?= $category->getName()?></a>
                 <?php endforeach?>
-                <a class="list-group-item list-group-item-action text-center" href="#"><strong>+ PRIDAŤ KATEGÓRIU +</strong></a>
-                <a class="list-group-item list-group-item-action text-center" href="#"><strong>+ PRIDAŤ POZNÁMKU +</strong></a>
+                <a class="list-group-item list-group-item-action text-center" href="<?= $link->url("category.createCategory") ?>"><strong>+ PRIDAŤ KATEGÓRIU +</strong></a>
+                <a class="list-group-item list-group-item-action text-center" href="<?= $link->url("home.addNote") ?>"><strong>+ PRIDAŤ POZNÁMKU +</strong></a>
                 <a class="list-group-item list-group-item-action text-center" href="#"><strong>- ODSTRÁNIŤ KATEGÓRIU -</strong></a>
                 <a class="list-group-item list-group-item-action text-center" href="#"><strong>- ODSTRÁNIŤ POZNÁMKU -</strong></a>
             </div>
