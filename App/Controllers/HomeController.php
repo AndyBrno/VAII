@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Category;
+use App\Models\Note;
 
 /**
  * Class HomeController
@@ -28,6 +30,7 @@ class HomeController extends AControllerBase
      */
     public function index(): Response
     {
+
         return $this->html();
     }
 
@@ -35,8 +38,13 @@ class HomeController extends AControllerBase
      * Example of an action accessible without authorization
      * @return \App\Core\Responses\ViewResponse
      */
-    public function contact(): Response
+    public function note(): Response
     {
-        return $this->html();
+        $cats = Category::getAll();
+        $notes = Note::getAll();
+        return $this->html([
+            "categories" => $cats,
+            "notes" => $notes
+        ]);
     }
 }

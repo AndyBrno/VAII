@@ -32,17 +32,17 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="<?= $link->url("home.contact") ?>">Kalendár</a>
+                <a class="nav-link" href="<?= $link->url("home.note") ?>">Kalendár</a>
             </li>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="<?= $link->url("home.contact") ?>">Poznámky</a>
+                <a class="nav-link" href="<?= $link->url("home.note") ?>">Poznámky</a>
             </li>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="<?= $link->url("home.contact") ?>">Úlohy</a>
+                <a class="nav-link" href="<?= $link->url("home.note") ?>">Úlohy</a>
             </li>
         </ul>
         <?php if ($auth->isLogged()) { ?>
@@ -75,7 +75,7 @@
             </a>
             <a href="<?= $link->url("home.index") ?>">Domov</a><br>
             <a href="kalendar.html">Kalendár</a><br>
-            <a href="poznamky.html">Poznámky</a><br>
+            <a href="<?= $link->url("home.note") ?>">Poznámky</a><br>
             <a href="ulohy.html">Úlohy</a>
         </div>
 
