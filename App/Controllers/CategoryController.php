@@ -36,4 +36,17 @@ class CategoryController extends AControllerBase
     {
         return $this->html();
     }
+
+    public function deleteCategory(): Response
+    {
+        return $this->html(["categories" => Category::getAll()]);
+    }
+
+    public function delete(): Response
+    {
+        $id = (int)$this->request()->getValue('id');
+        $category = Category::getOne($id);
+        $category->delete();
+        return $this->redirect($this->url('home.note'));
+    }
 }
