@@ -2,10 +2,10 @@
 
 /** @var Array $data
  *  @var \App\Models\Category $category
- *  @var \App\Models\Note $note*/
-
-
-/** @var \App\Core\LinkGenerator $link */
+ *  @var \App\Models\Note $note
+ *  @var \App\Core\LinkGenerator $link
+ * @var \App\Core\IAuthenticator $auth
+ */
 ?>
 
 <div class="dark-mode">
@@ -20,11 +20,35 @@
                 <?php foreach ($data["categories"] as $category):?>
                     <a class="list-group-item list-group-item-action" href="#<?= $category->getId()?>"><?= $category->getName()?></a>
                 <?php endforeach?>
-                <a class="list-group-item list-group-item-action text-center" href="<?= $link->url("category.createCategory") ?>"><strong>+ PRIDAŤ KATEGÓRIU +</strong></a>
-                <a class="list-group-item list-group-item-action text-center" href="<?= $link->url("category.deleteCategory") ?>"><strong>- ODSTRÁNIŤ KATEGÓRIU -</strong></a>
-                <a class="list-group-item list-group-item-action text-center" href="<?= $link->url("home.addNote") ?>"><strong>+ PRIDAŤ POZNÁMKU +</strong></a>
-                <a class="list-group-item list-group-item-action text-center" href="<?= $link->url("note.editNote") ?>"><strong>? UPRAVIŤ POZNÁMKU ?</strong></a>
-                <a class="list-group-item list-group-item-action text-center" href="#"><strong>- ODSTRÁNIŤ POZNÁMKU -</strong></a>
+
+                <?php if ($auth->isLogged()) { ?>
+                    <a class="list-group-item list-group-item-action text-center" href="<?= $link->url("category.createCategory") ?>"><strong>+ PRIDAŤ KATEGÓRIU +</strong></a>
+                <?php } else { ?>
+                    <a class="list-group-item list-group-item-action text-center" href="#" onclick="NeedLogin()"><strong>+ PRIDAŤ KATEGÓRIU +</strong></a>
+                <?php } ?>
+                <?php if ($auth->isLogged()) { ?>
+                    <a class="list-group-item list-group-item-action text-center" href="<?= $link->url("category.deleteCategory") ?>"><strong>- ODSTRÁNIŤ KATEGÓRIU -</strong></a>
+                <?php } else { ?>
+                    <a class="list-group-item list-group-item-action text-center" href="#" onclick="NeedLogin()"><strong>- ODSTRÁNIŤ KATEGÓRIU -</strong></a>
+                <?php } ?>
+                <?php if ($auth->isLogged()) { ?>
+                    <a class="list-group-item list-group-item-action text-center" href="<?= $link->url("home.addNote") ?>"><strong>+ PRIDAŤ POZNÁMKU +</strong></a>
+                <?php } else { ?>
+                    <a class="list-group-item list-group-item-action text-center" href="#" onclick="NeedLogin()"><strong>+ PRIDAŤ POZNÁMKU +</strong></a>
+                <?php } ?>
+                <?php if ($auth->isLogged()) { ?>
+                    <a class="list-group-item list-group-item-action text-center" href="<?= $link->url("note.editNote") ?>"><strong>? UPRAVIŤ POZNÁMKU ?</strong></a>
+                <?php } else { ?>
+                    <a class="list-group-item list-group-item-action text-center" href="#" onclick="NeedLogin()"><strong>? UPRAVIŤ POZNÁMKU ?</strong></a>
+                <?php } ?>
+                <?php if ($auth->isLogged()) { ?>
+                    <a class="list-group-item list-group-item-action text-center" href="#"><strong>- ODSTRÁNIŤ POZNÁMKU -</strong></a>
+                <?php } else { ?>
+                    <a class="list-group-item list-group-item-action text-center" href="#" onclick="NeedLogin()"><strong>- ODSTRÁNIŤ POZNÁMKU -</strong></a>
+                <?php } ?>
+
+
+
             </div>
         </div>
 
@@ -36,17 +60,33 @@
                 <div class="row justify-content-around">
                     <?php foreach ($data["categories"] as $category):?>
                         <h4 id="<?= $category->getId()?>" class="my-2 poznamky-mode"><?= $category->getName()?></h4>
-                        <?php foreach ($data["notes"] as $note):?>
-                            <?php if ($category->getId() == $note->getIdCat()) {?>
-                                <div class="card my-3" style="width: 18rem;">
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $note->getNadpis()?></h5>
-                                        <p class="card-text text-left"><?= $note->getPoznamka()?></p>
-                                    </div>
-                                </div>
-                            <?php }?>
-                        <?php endforeach?>
-                    <?php endforeach?>
+                        <?php foreach ($data["notes"] as $note):
+                            if ($auth->isLogged()) {
+                                if ($auth->getLoggedUserId() == $note->getUserId()) {//getLoggedUserId() nie je id :D
+                                    if ($category->getId() == $note->getIdCat()) {?>
+                                        <div class="card my-3" style="width: 18rem;">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?= $note->getNadpis()?></h5>
+                                                <p class="card-text text-left"><?= $note->getPoznamka()?></p>
+                                            </div>
+                                        </div>
+                                    <?php }
+                                }
+                            } else {
+                                if ($note->getUserId() == 1) {
+                                    if ($category->getId() == $note->getIdCat()) {?>
+                                        <div class="card my-3" style="width: 18rem;">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?= $note->getNadpis()?></h5>
+                                                <p class="card-text text-left"><?= $note->getPoznamka()?></p>
+                                            </div>
+                                        </div>
+                                    <?php }
+                                }
+                            }
+                        endforeach;
+                    endforeach; ?>
+
                 </div>
             </div>
         </div>

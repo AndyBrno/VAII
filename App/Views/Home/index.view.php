@@ -1,5 +1,8 @@
 <?php
-/** @var \App\Core\LinkGenerator $link */
+/**
+ * @var \App\Core\LinkGenerator $link
+ * @var \App\Core\IAuthenticator $auth
+ */
 ?>
 
 <div class="container">
@@ -26,7 +29,11 @@
                         Ďalšou výhodou nášho kalendára je schopnosť priradiť dôležitosť a prioritu vašim udalostiam, čo vám pomáha identifikovať, ktoré z nich sú najdôležitejšie.
                         Vďaka farebnej kategorizácii môžete jednoducho rozlíšiť medzi osobnými, pracovnými a rodinnými udalosťami.
                     </p>
-                    <a href="kalendar.html" class="btn btn-primary">Nastavte svoj čas podľa svojich potrieb ešte dnes!</a>
+                    <?php if ($auth->isLogged()) { ?>
+                        <a href="<?= $link->url("home.note") ?>" class="btn btn-primary">Nastavte svoj čas podľa svojich potrieb ešte dnes!</a>
+                    <?php } else { ?>
+                        <a onclick="NeedLogin()" class="btn btn-primary">Nastavte svoj čas podľa svojich potrieb ešte dnes!</a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -46,7 +53,11 @@
                         Naše užívateľské rozhranie vám poskytuje jednoduchý a intuitívny spôsob práce s vašimi myšlienkami.
                         Nemusíte sa ničoho obávať. Vaše myšlienky sú vždy na dosah ruky, takže ich môžete zaznamenávať a sledovať, ako sa menia a rozvíjajú.
                     </p>
-                    <a href="<?= $link->url("home.note") ?>" class="btn btn-primary">Nechajte kreativitu voľne plynúť a začnite písať!</a>
+                    <?php if ($auth->isLogged()) { ?>
+                        <a href="<?= $link->url("home.note") ?>" class="btn btn-primary">Nechajte kreativitu voľne plynúť a začnite písať!</a>
+                    <?php } else { ?>
+                        <a onclick="NeedLogin()" class="btn btn-primary">Nechajte kreativitu voľne plynúť a začnite písať!</a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -71,7 +82,11 @@
                         S touto prehľadnou organizáciou úloh budete mať stále všetko pod kontrolou.
                         Bez ohľadu na to, či ide o malé bežné úlohy alebo veľké projekty, jednoduché a efektívne rozdelenie vám pomôže dosiahnuť vaše ciele s ľahkosťou.<br>
                     </p>
-                    <a href="ulohy.html" class="btn btn-primary">Začnite plánovať, pracovať a oslavovať svoje úspechy už dnes!</a>
+                    <?php if ($auth->isLogged()) { ?>
+                        <a href="<?= $link->url("home.note") ?>" class="btn btn-primary">Začnite plánovať, pracovať a oslavovať svoje úspechy už dnes!</a>
+                    <?php } else { ?>
+                        <a onclick="NeedLogin()" class="btn btn-primary">Začnite plánovať, pracovať a oslavovať svoje úspechy už dnes!</a>
+                    <?php } ?>
                 </div>
             </div>
         </div>

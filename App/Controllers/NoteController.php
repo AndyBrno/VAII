@@ -6,6 +6,10 @@ use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Note;
 
+/**
+ *  @var \App\Core\IAuthenticator $auth
+ */
+
 class NoteController extends AControllerBase
 {
 
@@ -21,7 +25,7 @@ class NoteController extends AControllerBase
     public function save(): Response
     {
         $note = new Note();
-        $note->setUserId(1);
+        $note->setUserId(7);
         $note->setIdCat($this->request()->getValue('Note_Category'));
         $note->setNadpis($this->request()->getValue('newNadpis'));
         $note->setPoznamka($this->request()->getValue('newPoznamka'));
