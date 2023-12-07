@@ -18,4 +18,17 @@ class Authenticator extends DummyAuthenticator
 
         return false;
     }
+
+    public function register($login, $password): bool
+    {
+        $users = User::getAll();
+        foreach ($users as $user):
+            if ($login == $user->getNick()) {
+                return false;
+            }
+        endforeach;
+
+        $_SESSION['user'] = $login;
+        return true;
+    }
 }

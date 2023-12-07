@@ -24,6 +24,21 @@ class AuthController extends AControllerBase
         return $this->redirect(Configuration::LOGIN_URL);
     }
 
+    public function register(): Response
+    {
+        $formData = $this->app->getRequest()->getPost();
+        $logged = null;
+        if (isset($formData['submit'])) {
+            $logged = $this->app->getAuth()->register($formData['login'], $formData['password']);
+            if ($logged) {
+                return $this->save($formData['login'], $formData['password']);
+            }
+        }
+
+        $data = ($logged === false ? ['message' => 'Zlý login alebo heslo!'] : []);
+        return $this->html($data);
+    }
+
     /**
      * Login a user
      * @return Response
@@ -36,7 +51,6 @@ class AuthController extends AControllerBase
             $logged = $this->app->getAuth()->login($formData['login'], $formData['password']);
             if ($logged) {
                 return $this->save($formData['login'], $formData['password']);
-                //return $this->redirect($this->url("admin.index"));
             }
         }
 
@@ -69,7 +83,7 @@ class AuthController extends AControllerBase
     {
         $users = User::getAll();
         foreach ($users as $user):
-            if ($user->getPassword() == $nick) {
+            if ($user->getNick() == $nick) {
                 return true;
             }
             endforeach;
