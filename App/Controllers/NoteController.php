@@ -20,13 +20,12 @@ class NoteController extends AControllerBase
 
     public function save(): Response
     {
-        $post = new Note();
-        $post->setUserId(1);
-        //$post->setIdCat(1);
-        $post->setNadpis($this->request()->getValue('newNadpis'));
-        $post->setIdCat($this->request()->getValue('Note_Category'));
-        $post->setPoznamka($this->request()->getValue('newPoznamka'));
-        $post->save();
+        $note = new Note();
+        $note->setUserId(1);
+        $note->setIdCat($this->request()->getValue('Note_Category'));
+        $note->setNadpis($this->request()->getValue('newNadpis'));
+        $note->setPoznamka($this->request()->getValue('newPoznamka'));
+        $note->save();
 
         return $this->redirect($this->url('home.note'));
     }

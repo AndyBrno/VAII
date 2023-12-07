@@ -1,6 +1,5 @@
 <?php
 
-$layout = 'auth';
 /** @var Array $data */
 /** @var \App\Core\LinkGenerator $link */
 ?>
@@ -10,7 +9,7 @@ $layout = 'auth';
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Prihlásenie</h5>
+                    <h5 class="card-title text-center">Prihlásiť</h5>
                     <div class="text-center text-danger mb-3">
                         <?= @$data['message'] ?>
                     </div>
@@ -25,8 +24,7 @@ $layout = 'auth';
                                    placeholder="Password" required>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn-primary" type="submit" name="submit">Prihlásiť
-                            </button>
+                            <button class="btn btn-primary" type="submit" name="submit">Prihlásiť</button>
                         </div>
                     </form>
                 </div>

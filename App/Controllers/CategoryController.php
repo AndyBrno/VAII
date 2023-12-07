@@ -25,9 +25,9 @@ class CategoryController extends AControllerBase
 
     public function save(): Response
     {
-        $post = new Category();
-        $post->setName($this->request()->getValue('newCategory'));
-        $post->save();
+        $category = new Category();
+        $category->setName($this->request()->getValue('newCategory'));
+        $category->save();
 
         return $this->redirect($this->url('home.note'));
     }

@@ -48,14 +48,14 @@
         <?php if ($auth->isLogged()) { ?>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= $link->url("auth.logout") ?>">Odhlásenie</a>
+                    <a class="nav-link" href="<?= $link->url("auth.logout") ?>">Odhlásiť</a>
                     <span class="navbar-text"><b><?= $auth->getLoggedUserName() ?></b></span>
                 </li>
             </ul>
         <?php } else { ?>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásenie</a>
+                    <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásiť</a>
                 </li>
             </ul>
         <?php } ?>

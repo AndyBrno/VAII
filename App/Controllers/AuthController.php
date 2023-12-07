@@ -6,6 +6,7 @@ use App\Config\Configuration;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Core\Responses\ViewResponse;
+use App\Models\User;
 
 /**
  * Class AuthController
@@ -34,7 +35,8 @@ class AuthController extends AControllerBase
         if (isset($formData['submit'])) {
             $logged = $this->app->getAuth()->login($formData['login'], $formData['password']);
             if ($logged) {
-                return $this->redirect($this->url("admin.index"));
+                return $this->save($formData['login'], $formData['password']);
+                //return $this->redirect($this->url("admin.index"));
             }
         }
 
@@ -50,5 +52,27 @@ class AuthController extends AControllerBase
     {
         $this->app->getAuth()->logout();
         return $this->html();
+    }
+
+    public function save($nick, $password): Response
+    {
+        if (!$this->isUser($nick)) {
+            $user = new User();
+            $user->setNick($nick);
+            $user->setPassword($password);
+            $user->save();
+        }
+        return $this->redirect($this->url('admin.index'));
+    }
+
+    public function isUser($nick): bool
+    {
+        $users = User::getAll();
+        foreach ($users as $user):
+            if ($user->getPassword() == $nick) {
+                return true;
+            }
+            endforeach;
+        return false;
     }
 }
