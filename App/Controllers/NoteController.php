@@ -34,4 +34,18 @@ class NoteController extends AControllerBase
     {
         return $this->html();
     }
+
+    public function editNote(): Response
+    {
+        return $this->html(["notes" => Note::getAll()]);
+    }
+
+    public function edit(): Response
+    {
+        $id = (int)$this->request()->getValue('id');
+        $note = Note::getOne($id);
+        $note->setPoznamka("asdsssssssssssffdsdads");
+        $note->save();
+        return $this->redirect($this->url('home.note'));
+    }
 }
